@@ -24,6 +24,10 @@ Image {
 		running: true
 		easing.type: Easing.InOutQuad
 		to: 0
+
+		onFinished: {
+			enemy.scale = 0
+		}
 	}
 
 	Component.onCompleted: {
