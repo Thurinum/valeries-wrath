@@ -10,7 +10,7 @@ Emitter {
 	property bool isMoving: false
 
 	width: 100
-	height: 100
+	height: 40
 	focus: true
 	system: playerTrail
 	emitRate: 10000
@@ -67,7 +67,9 @@ Emitter {
 
 	Image {
 		id: playerSprite
-		anchors.fill: parent
+		fillMode: Image.PreserveAspectFit
+		height: player.height + 50
+		anchors.centerIn: parent
 		source: "/resources/images/player.png"
 	}
 }

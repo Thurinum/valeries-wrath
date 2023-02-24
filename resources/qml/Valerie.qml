@@ -16,6 +16,16 @@ Image {
 		}
 	}
 
+
+	NumberAnimation {
+		target: enemy
+		property: "anchors.horizontalCenterOffset"
+		duration: 10000 + x
+		running: true
+		easing.type: Easing.InOutQuad
+		to: 0
+	}
+
 	Component.onCompleted: {
 		scale = 1
 	}

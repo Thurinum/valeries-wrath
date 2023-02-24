@@ -139,7 +139,7 @@ Item {
 	Timer {
 		id: enemyTimer
 
-		interval: 1000
+		interval: 50
 		triggeredOnStart: true
 		running: true
 		repeat: true
@@ -155,7 +155,7 @@ Item {
 
 	Timer {
 		id: cloudTimer
-		interval: 2500
+		interval: 500
 		triggeredOnStart: true
 		repeat: true
 		running: true
@@ -163,8 +163,9 @@ Item {
 			Components.spawn("Cloud", foreground,
 					     {
 						     x: player.anchors.horizontalCenterOffset + root.width + 250,
-						     y: 0,
-						     z: Math.random() > 0.5 ? -1 : 2
+						     y: Math.random() * root.height * 0.9,
+						     z: Math.random() > 0.5 ? -1 : 2,
+						     rotation: Math.random() > 0.5 ? 180 : 0
 					     })
 		}
 	}
