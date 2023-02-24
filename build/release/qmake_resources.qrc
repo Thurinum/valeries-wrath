@@ -1,0 +1,14 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+<file alias="resources/images/player.png">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/images/player.png</file>
+<file alias="resources/images/valerie.png">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/images/valerie.png</file>
+<file alias="resources/qml/Main.qml">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/qml/Main.qml</file>
+<file alias="resources/qml/Player.qml">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/qml/Player.qml</file>
+<file alias="resources/qml/Valerie.qml">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/qml/Valerie.qml</file>
+<file alias="resources/images/player.png">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/images/player.png</file>
+<file alias="resources/images/valerie.png">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/images/valerie.png</file>
+<file alias="resources/qml/Main.qml">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/qml/Main.qml</file>
+<file alias="resources/qml/Player.qml">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/qml/Player.qml</file>
+<file alias="resources/qml/Valerie.qml">C:/Users/Thurinum/Documents/Repositories/Valerie/resources/qml/Valerie.qml</file>
+</qresource>
+</RCC>
