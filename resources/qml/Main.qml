@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Particles
+import "qrc:/resources/scripts/DynamicComponents.js" as Components
 
 Item {
 	id: root
@@ -89,21 +90,21 @@ Item {
 			Keys.onLeftPressed: {
 				player.anchors.horizontalCenterOffset -= player.speed
 				foreground.x += player.speed
-				 isMoving = true
+				isMoving = true
 			}
 			Keys.onRightPressed: {
 				player.anchors.horizontalCenterOffset += player.speed
 				foreground.x -= player.speed
-				 isMoving = true
+				isMoving = true
 			}
 
 			Keys.onUpPressed: {
 				player.anchors.verticalCenterOffset -= player.speed / 2
-				 isMoving = true
+				isMoving = true
 			}
 			Keys.onDownPressed: {
 				player.anchors.verticalCenterOffset += player.speed / 2
-				 isMoving = true
+				isMoving = true
 			}
 
 			Keys.onReleased: (e) => {
@@ -143,35 +144,12 @@ Item {
 		running: true
 		repeat: true
 		onTriggered: {
-			createValerie()
-		}
-	}
-
-	function createValerie() {
-		let component = Qt.createComponent("Valerie.qml")
-
-		if (component.status === Component.Ready)
-			spawnValerie(component);
-
-		component.statusChanged.connect(() => {
-								  spawnValerie(component)
-							  })
-	}
-
-	function spawnValerie(component) {
-		if (component.status === Component.Ready) {
-			let dir = Math.random() > 0.5 ? 1 : -1
-			let sprite = component.createObject(foreground, {
-										"anchors.horizontalCenterOffset": Math.random() * root.width / 2 - foreground.x,
-										"anchors.verticalCenterOffset": dir * Math.random() * root.height / 2,
-										z: Math.random() > 0.5 ? -1 : 1
-									});
-
-			if (sprite === null) {
-				console.log("Error creating object");
-			}
-		} else if (component.status === Component.Error) {
-			console.log("Error loading component:", component.errorString());
+			Components.spawn("Valerie", foreground,
+					     {
+						     "anchors.horizontalCenterOffset": Math.random() * root.width / 2 - foreground.x,
+						     "anchors.verticalCenterOffset": Math.random() > 0.5 ? 1 : -1 * Math.random() * root.height / 2,
+						     z: Math.random() > 0.5 ? -1 : 1
+					     })
 		}
 	}
 }

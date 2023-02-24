@@ -16,7 +16,8 @@ int main(int argc, char *argv[])
 	view.setWidth(1280);
 	view.setHeight(720);
 	view.setTitle("SOLID: Valerie's Wrath");
-	view.show();
+    view.setIcon(QIcon("qrc:/resources/images/valerie.png"));
+    view.show();
 
-	return app.exec();
+    return app.exec();
 }
