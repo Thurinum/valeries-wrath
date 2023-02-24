@@ -139,7 +139,7 @@ Item {
 	Timer {
 		id: enemyTimer
 
-		interval: 100
+		interval: 1000
 		triggeredOnStart: true
 		running: true
 		repeat: true
@@ -147,8 +147,24 @@ Item {
 			Components.spawn("Valerie", foreground,
 					     {
 						     "anchors.horizontalCenterOffset": Math.random() * root.width / 2 - foreground.x,
-						     "anchors.verticalCenterOffset": Math.random() > 0.5 ? 1 : -1 * Math.random() * root.height / 2,
+						     "anchors.verticalCenterOffset": (Math.random() > 0.5 ? 1 : -1) * Math.random() * root.height / 2,
 						     z: Math.random() > 0.5 ? -1 : 1
+					     })
+		}
+	}
+
+	Timer {
+		id: cloudTimer
+		interval: 2500
+		triggeredOnStart: true
+		repeat: true
+		running: true
+		onTriggered: {
+			Components.spawn("Cloud", foreground,
+					     {
+						     x: player.anchors.horizontalCenterOffset + root.width + 250,
+						     y: 0,
+						     z: Math.random() > 0.5 ? -1 : 2
 					     })
 		}
 	}
