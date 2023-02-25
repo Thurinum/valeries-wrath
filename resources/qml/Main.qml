@@ -53,7 +53,7 @@ Item {
 		transitions: Transition {
 			ColorAnimation {
 				target: sunGradient
-				duration: 1000
+				duration: 10000
 			}
 		}
 	}
@@ -65,7 +65,7 @@ Item {
 
 		repeat: true
 		running: true
-		interval: 100
+		interval: 500
 		onTriggered: {
 			if (value >= 0.98)
 				value = 0
@@ -73,6 +73,10 @@ Item {
 				value += 0.01
 
 		}
+	}
+
+	Weather {
+		id: weather
 	}
 
 	Rectangle {
@@ -155,11 +159,15 @@ Item {
 
 	Timer {
 		id: cloudTimer
-		interval: 500
+		interval: weather.active ? 50 : 500
 		triggeredOnStart: true
 		repeat: true
 		running: true
 		onTriggered: {
+			if (Math.random() < 0.01) {
+				weather.active = !weather.active
+			}
+
 			Components.spawn("Cloud", foreground,
 					     {
 						     x: player.anchors.horizontalCenterOffset + root.width + 250,
