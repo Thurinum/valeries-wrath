@@ -1,7 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQmlEngine>
 #include <QQuickView>
 #include <QUrl>
+#include "backend.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +21,11 @@ int main(int argc, char *argv[])
 	view.setTitle("SOLID: Valerie's Wrath");
     view.setIcon(QIcon("qrc:/resources/images/valerie.png"));
     view.show();
+
+    Backend backend;
+
+    QQmlEngine *engine = view.engine();
+    engine->rootContext()->setContextProperty("Backend", &backend);
 
     return app.exec();
 }
