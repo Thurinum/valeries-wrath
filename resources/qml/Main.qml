@@ -20,7 +20,7 @@ Item {
 		states: [
 			State {
 				name: "dawn_dusk"
-				when: (sun.value >= 0 && sun.value <= 0.1) || (sun.value > 0.4 && sun.value <= 0.5)
+                when: (sun.value >= 0 && sun.value <= 0.1) || (sun.value > 0.4 && sun.value <= 0.6)
 
 				PropertyChanges {
 					sunGradient {
@@ -40,7 +40,7 @@ Item {
 			},
 			State {
 				name: "night"
-				when: sun.value > 0.5 && sun.value <= 1
+                when: sun.value > 0.6 && sun.value <= 1
 
 				PropertyChanges {
 					sunGradient {
@@ -53,7 +53,7 @@ Item {
 		transitions: Transition {
 			ColorAnimation {
 				target: sunGradient
-				duration: 10000
+                duration: 1000
 			}
 		}
 	}
@@ -65,7 +65,7 @@ Item {
 
 		repeat: true
 		running: true
-		interval: 500
+        interval: 500
 		onTriggered: {
 			if (value >= 0.98)
 				value = 0
@@ -158,15 +158,19 @@ Item {
 	}
 
 	Timer {
+
 		id: cloudTimer
-		interval: weather.active ? 50 : 500
+        interval: weather.active ? 50 : 500 // more clouds when raining
 		triggeredOnStart: true
 		repeat: true
 		running: true
 		onTriggered: {
-			if (Math.random() < 0.01) {
-				weather.active = !weather.active
-			}
+            if (!weather.active && Math.random() < 0.03) {
+                weather.active = true
+            }
+            if (weather.active && Math.random() < 0.01) {
+                weather.active = false
+            }
 
 			Components.spawn("Cloud", foreground,
 					     {
