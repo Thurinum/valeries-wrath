@@ -1,79 +1,19 @@
 import QtQuick
 import QtQuick.Particles
+import QtQuick.Controls
 import "qrc:/resources/scripts/DynamicComponents.js" as Components
 
 Item {
 	id: root
 
+    property int daynight_cycle_duration: 24000
+
 	anchors.fill: parent
 
-	Rectangle {
-		id: background
-
-		anchors.fill: root
-
-		gradient: Gradient {
-			GradientStop { id: sunGradient; position: 0.0; color: "orange" }
-			GradientStop { position: 1.0; color: "white" }
-		}
-
-		states: [
-			State {
-				name: "dawn_dusk"
-                when: (sun.value >= 0 && sun.value <= 0.1) || (sun.value > 0.4 && sun.value <= 0.6)
-
-				PropertyChanges {
-					sunGradient {
-						color: "orange"
-					}
-				}
-			},
-			State {
-				name: "day"
-				when: sun.value > 0.1 && sun.value <= 0.4
-
-				PropertyChanges {
-					sunGradient {
-						color: "lightblue"
-					}
-				}
-			},
-			State {
-				name: "night"
-                when: sun.value > 0.6 && sun.value <= 1
-
-				PropertyChanges {
-					sunGradient {
-						color: "darkblue"
-					}
-				}
-			}
-		]
-
-		transitions: Transition {
-			ColorAnimation {
-				target: sunGradient
-                duration: 1000
-			}
-		}
-	}
-
-	Timer {
-		id: sun
-
-		property double value: 0
-
-		repeat: true
-		running: true
-        interval: 500
-		onTriggered: {
-			if (value >= 0.98)
-				value = 0
-			else
-				value += 0.01
-
-		}
-	}
+    Sky {
+        id: background
+        anchors.fill: root
+    }
 
 	Weather {
 		id: weather
@@ -143,7 +83,7 @@ Item {
 	Timer {
 		id: enemyTimer
 
-		interval: 50
+        interval: 50
 		triggeredOnStart: true
 		running: true
 		repeat: true
@@ -152,7 +92,7 @@ Item {
 					     {
 						     "anchors.horizontalCenterOffset": Math.random() * root.width / 2 - foreground.x,
 						     "anchors.verticalCenterOffset": (Math.random() > 0.5 ? 1 : -1) * Math.random() * root.height / 2,
-						     z: Math.random() > 0.5 ? -1 : 1
+                             z: Math.random() > 0.5 ? -1 : 1
 					     })
 		}
 	}
@@ -181,4 +121,15 @@ Item {
 					     })
 		}
 	}
+
+    Button {
+        text: "owo"
+        onClicked: {
+            Backend.blah()
+
+//            Backend.name = "dummy"
+//            console.log(Backend.name)
+        }
+    }
+
 }
