@@ -103,7 +103,6 @@ Item {
         width: 0.25 * root.width
         height: root.height
         dragMargin: 100
-        position: 1
 
         PlayerSelector {
             id: playerSelector
@@ -123,7 +122,7 @@ Item {
 
         interval: 50
         triggeredOnStart: true
-        running: false
+        running: true
         repeat: true
         onTriggered: {
             Components.spawn("Valerie", foreground,
