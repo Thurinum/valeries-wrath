@@ -17,15 +17,45 @@ Emitter {
     }
     property alias movement: movement
 
+    function move() {
+        let xOffset = 0;
+        let yOffset = 0;
+
+        if (movement.isLeft) {
+            xOffset += player.speed
+        }
+
+        if (movement.isRight) {
+            xOffset -= player.speed
+        }
+
+        if (movement.isTop) {
+            yOffset += player.speed
+        }
+
+        if (movement.isBottom) {
+            yOffset -= player.speed
+        }
+
+        foreground.x += xOffset
+        player.anchors.horizontalCenterOffset -= xOffset
+
+        foreground.y += yOffset
+        player.anchors.verticalCenterOffset -= yOffset
+    }
+
     width: 100
 	height: 40
-	focus: true
-	system: playerTrail
+    focus: true
+
+    system: trail
 	emitRate: 10000
 	lifeSpan: 0
 	lifeSpanVariation: 0
+
 	size: 8
 	endSize: 24
+
 	velocity: AngleDirection {
 		angle: 180
 		angleVariation: 5
@@ -63,47 +93,20 @@ Emitter {
 	}
 
 	ParticleSystem {
-		id: playerTrail
+        id: trail
 	}
 
 	ImageParticle {
 		source: "/resources/images/valerie.png"
-		system: playerTrail
+        system: trail
         color: player.particlesColor
 	}
 
 	Image {
-		id: playerSprite
+        id: sprite
+        anchors.centerIn: parent
 		fillMode: Image.PreserveAspectFit
         height: player.height + 50
-		anchors.centerIn: parent
         source: "/resources/images/cloud.png"
 	}
-
-    function move() {
-        let xOffset = 0;
-        let yOffset = 0;
-
-        if (movement.isLeft) {
-            xOffset += player.speed
-        }
-
-        if (movement.isRight) {
-            xOffset -= player.speed
-        }
-
-        if (movement.isTop) {
-            yOffset += player.speed
-        }
-
-        if (movement.isBottom) {
-            yOffset -= player.speed
-        }
-
-        foreground.x += xOffset
-        player.anchors.horizontalCenterOffset -= xOffset
-
-        foreground.y += yOffset
-        player.anchors.verticalCenterOffset -= yOffset
-    }
 }

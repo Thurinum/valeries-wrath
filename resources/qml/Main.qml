@@ -30,6 +30,23 @@ Item {
             z: 0
             anchors.centerIn: parent
 
+            function processMovement(key, value) {
+                switch (key) {
+                case Qt.Key_Left:
+                    player.movement.isLeft = value
+                    break
+                case Qt.Key_Right:
+                    player.movement.isRight = value
+                    break
+                case Qt.Key_Up:
+                    player.movement.isTop = value
+                    break
+                case Qt.Key_Down:
+                    player.movement.isBottom = value
+                    break
+                }
+            }
+
             Keys.onPressed: (e) => {
                                 if (e.isAutoRepeat) {
                                     return
@@ -66,23 +83,6 @@ Item {
                     easing.type: Easing.OutQuad
                 }
             }
-
-            function processMovement(key, value) {
-                switch (key) {
-                case Qt.Key_Left:
-                    player.movement.isLeft = value
-                    break
-                case Qt.Key_Right:
-                    player.movement.isRight = value
-                    break
-                case Qt.Key_Up:
-                    player.movement.isTop = value
-                    break
-                case Qt.Key_Down:
-                    player.movement.isBottom = value
-                    break
-                }
-            }
         }
 
         Behavior on x {
@@ -100,7 +100,7 @@ Item {
     }
 
     Timer {
-        id: enemyTimer
+        id: valerieTimer
 
         interval: 50
         triggeredOnStart: true
@@ -117,8 +117,7 @@ Item {
     }
 
     Timer {
-
-        id: cloudTimer
+        id: weatherTimer
         interval: weather.active ? 50 : 500 // more clouds when raining
         triggeredOnStart: true
         repeat: true
@@ -140,15 +139,4 @@ Item {
                              })
         }
     }
-
-    Button {
-        text: "owo"
-        onClicked: {
-            Backend.blah()
-
-            //            Backend.name = "dummy"
-            //            console.log(Backend.name)
-        }
-    }
-
 }
