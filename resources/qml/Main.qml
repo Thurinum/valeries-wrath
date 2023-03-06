@@ -96,6 +96,15 @@ Item {
         }
     }
 
+    Drawer {
+        id: drawer
+        width: 0.25 * root.width
+        height: root.height
+        dragMargin: 100
+
+        PlayerSelector {}
+    }
+
     Timer {
         id: valerieTimer
 
