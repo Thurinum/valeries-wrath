@@ -103,12 +103,19 @@ Item {
         width: 0.25 * root.width
         height: root.height
         dragMargin: 100
+        position: 1
 
         PlayerSelector {
             id: playerSelector
 
             selectedSprite: "/resources/images/playersprites/leduc.png"
         }
+    }
+
+    RoundButton {
+        id: drawerButton
+        icon.source: playerSelector.selectedSprite
+        onClicked: drawer.open()
     }
 
     Timer {
