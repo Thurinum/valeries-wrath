@@ -70,6 +70,6 @@ Emitter {
 		fillMode: Image.PreserveAspectFit
 		height: player.height + 50
 		anchors.centerIn: parent
-		source: "/resources/images/player.png"
+        source: "/resources/images/cloud.png"
 	}
 }
