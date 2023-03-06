@@ -17,32 +17,7 @@ Emitter {
     }
     property alias movement: movement
 
-    function move() {
-        let xOffset = 0;
-        let yOffset = 0;
-
-        if (movement.isLeft) {
-            xOffset += player.speed
-        }
-
-        if (movement.isRight) {
-            xOffset -= player.speed
-        }
-
-        if (movement.isTop) {
-            yOffset += player.speed
-        }
-
-        if (movement.isBottom) {
-            yOffset -= player.speed
-        }
-
-        foreground.x += xOffset
-        player.anchors.horizontalCenterOffset -= xOffset
-
-        foreground.y += yOffset
-        player.anchors.verticalCenterOffset -= yOffset
-    }
+    signal move(xOffset: double, yOffset: double)
 
     width: 100
 	height: 40
@@ -91,6 +66,31 @@ Emitter {
 			duration: 1000
 		}
 	}
+
+    Timer {
+        id: movementTimer
+        interval: 50
+        repeat: true
+        running: movement.isMoving
+        triggeredOnStart: true
+        onTriggered: {
+            let xOffset = 0, yOffset = 0;
+
+            if (movement.isLeft)
+                xOffset += player.speed
+
+            if (movement.isRight)
+                xOffset -= player.speed
+
+            if (movement.isTop)
+                yOffset += player.speed
+
+            if (movement.isBottom)
+                yOffset -= player.speed
+
+            move(xOffset, yOffset)
+        }
+    }
 
 	ParticleSystem {
         id: trail

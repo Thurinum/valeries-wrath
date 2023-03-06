@@ -47,29 +47,26 @@ Item {
                 }
             }
 
+            onMove: (xOffset, yOffset) => {
+                foreground.x += xOffset
+                foreground.y += yOffset
+
+                player.anchors.horizontalCenterOffset -= xOffset
+                player.anchors.verticalCenterOffset -= yOffset
+            }
+
             Keys.onPressed: (e) => {
-                                if (e.isAutoRepeat) {
+                                if (e.isAutoRepeat)
                                     return
-                                }
 
                                 processMovement(e.key, true)
                             }
-
             Keys.onReleased: (e) => {
-                                 if (e.isAutoRepeat) {
+                                 if (e.isAutoRepeat)
                                      return
-                                 }
 
                                  processMovement(e.key, false)
                              }
-
-            Timer {
-                interval: 50
-                repeat: true
-                running: player.movement.isMoving
-                triggeredOnStart: true
-                onTriggered: player.move()
-            }
 
             Behavior on anchors.horizontalCenterOffset {
                 NumberAnimation {
