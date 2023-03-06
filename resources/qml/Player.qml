@@ -6,6 +6,7 @@ Emitter {
 
 	property color particlesColor: Qt.rgba(0.1, 0.1, 0.1, 0.4)
     property double speed: 100
+    required property string sprite
 
     QtObject {
         id: movement
@@ -21,7 +22,7 @@ Emitter {
 
     width: 100
 	height: 40
-    focus: true
+    focus: !drawer.position
 
     system: trail
 	emitRate: 10000
@@ -107,6 +108,6 @@ Emitter {
         anchors.centerIn: parent
 		fillMode: Image.PreserveAspectFit
         height: player.height + 50
-        source: "/resources/images/cloud.png"
+        source: player.sprite
 	}
 }

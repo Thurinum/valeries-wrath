@@ -30,6 +30,8 @@ Item {
             z: 0
             anchors.centerIn: parent
 
+            sprite: playerSelector.selectedSprite
+
             function processMovement(key, value) {
                 switch (key) {
                 case Qt.Key_Left:
@@ -102,7 +104,11 @@ Item {
         height: root.height
         dragMargin: 100
 
-        PlayerSelector {}
+        PlayerSelector {
+            id: playerSelector
+
+            selectedSprite: "/resources/images/playersprites/leduc.png"
+        }
     }
 
     Timer {
