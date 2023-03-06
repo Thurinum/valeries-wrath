@@ -30,19 +30,12 @@ Item {
             z: 0
             anchors.centerIn: parent
 
-            property var movementState: {
-                "isLeft": false,
-                "isRight": false,
-                "isTop": false,
-                "isBottom": false
-            }
-
             Keys.onPressed: (e) => {
                                 if (e.isAutoRepeat) {
                                     return
                                 }
 
-                                keyStateChanged(e.key, true)
+                                processMovement(e.key, true)
                             }
 
             Keys.onReleased: (e) => {
@@ -50,70 +43,15 @@ Item {
                                      return
                                  }
 
-                                 keyStateChanged(e.key, false)
+                                 processMovement(e.key, false)
                              }
 
-            function keyStateChanged(key, value) {
-                switch (key) {
-                case Qt.Key_Left:
-                    movementState.isLeft = value
-                    break
-                case Qt.Key_Right:
-                    movementState.isRight = value
-                    break
-                case Qt.Key_Up:
-                    movementState.isTop = value
-                    break
-                case Qt.Key_Down:
-                    movementState.isBottom = value
-                    break
-                }
-
-                player.isMoving = (movementState.isLeft || movementState.isRight || movementState.isTop || movementState.isBottom)
-
-                if (player.isMoving)
-                    rightTimer.start()
-                else rightTimer.stop()
-            }
-
-            function move() {
-                let xOffset = 0;
-                let yOffset = 0;
-
-                if (movementState.isLeft) {
-                    xOffset += player.speed
-                }
-
-                if (movementState.isRight) {
-                    xOffset -= player.speed
-                }
-
-                if (movementState.isTop) {
-                    yOffset += player.speed
-                }
-
-                if (movementState.isBottom) {
-                    yOffset -= player.speed
-                }
-
-                console.log("Let's move" + Math.random())
-
-                foreground.x += xOffset
-                player.anchors.horizontalCenterOffset -= xOffset
-
-                foreground.y += yOffset
-                player.anchors.verticalCenterOffset -= yOffset
-            }
-
             Timer {
-                id: rightTimer
                 interval: 50
-                running: player.movementState.isRight
                 repeat: true
+                running: player.movement.isMoving
                 triggeredOnStart: true
-                onTriggered: {
-                    player.move()
-                }
+                onTriggered: player.move()
             }
 
             Behavior on anchors.horizontalCenterOffset {
@@ -126,6 +64,23 @@ Item {
                 NumberAnimation {
                     duration: 50
                     easing.type: Easing.OutQuad
+                }
+            }
+
+            function processMovement(key, value) {
+                switch (key) {
+                case Qt.Key_Left:
+                    player.movement.isLeft = value
+                    break
+                case Qt.Key_Right:
+                    player.movement.isRight = value
+                    break
+                case Qt.Key_Up:
+                    player.movement.isTop = value
+                    break
+                case Qt.Key_Down:
+                    player.movement.isBottom = value
+                    break
                 }
             }
         }

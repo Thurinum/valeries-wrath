@@ -2,14 +2,22 @@ import QtQuick
 import QtQuick.Particles
 
 Emitter {
-	id: player
+    id: player
 
 	property color particlesColor: Qt.rgba(0.1, 0.1, 0.1, 0.4)
-	property double speed: 100
+    property double speed: 100
 
-	property bool isMoving: false
+    QtObject {
+        id: movement
+        property bool isLeft: false
+        property bool isRight: false
+        property bool isTop: false
+        property bool isBottom: false
+        property bool isMoving: isLeft || isRight || isTop || isBottom
+    }
+    property alias movement: movement
 
-	width: 100
+    width: 100
 	height: 40
 	focus: true
 	system: playerTrail
@@ -28,7 +36,7 @@ Emitter {
 
 	states: [
 		State {
-			when: isMoving
+            when: movement.isMoving
 
 			PropertyChanges {
 				player {
@@ -54,7 +62,6 @@ Emitter {
 		}
 	}
 
-
 	ParticleSystem {
 		id: playerTrail
 	}
@@ -62,14 +69,41 @@ Emitter {
 	ImageParticle {
 		source: "/resources/images/valerie.png"
 		system: playerTrail
-		color: player.particlesColor
+        color: player.particlesColor
 	}
 
 	Image {
 		id: playerSprite
 		fillMode: Image.PreserveAspectFit
-		height: player.height + 50
+        height: player.height + 50
 		anchors.centerIn: parent
         source: "/resources/images/cloud.png"
 	}
+
+    function move() {
+        let xOffset = 0;
+        let yOffset = 0;
+
+        if (movement.isLeft) {
+            xOffset += player.speed
+        }
+
+        if (movement.isRight) {
+            xOffset -= player.speed
+        }
+
+        if (movement.isTop) {
+            yOffset += player.speed
+        }
+
+        if (movement.isBottom) {
+            yOffset -= player.speed
+        }
+
+        foreground.x += xOffset
+        player.anchors.horizontalCenterOffset -= xOffset
+
+        foreground.y += yOffset
+        player.anchors.verticalCenterOffset -= yOffset
+    }
 }
