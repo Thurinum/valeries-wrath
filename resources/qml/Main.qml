@@ -72,28 +72,28 @@ Item {
 
             Behavior on anchors.horizontalCenterOffset {
                 NumberAnimation {
-                    duration: 50
-                    easing.type: Easing.OutQuad
+                    duration: 500
+                    easing.type: Easing.OutElastic
                 }
             }
             Behavior on anchors.verticalCenterOffset {
                 NumberAnimation {
-                    duration: 50
-                    easing.type: Easing.OutQuad
+                    duration: 500
+                    easing.type: Easing.OutElastic
                 }
             }
         }
 
         Behavior on x {
             NumberAnimation {
-                duration: 50
-                easing.type: Easing.OutQuad
+                duration: 500
+                easing.type: Easing.OutElastic
             }
         }
         Behavior on y {
             NumberAnimation {
-                duration: 50
-                easing.type: Easing.OutQuad
+                duration: 500
+                easing.type: Easing.OutElastic
             }
         }
     }
