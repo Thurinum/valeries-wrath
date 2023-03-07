@@ -36,6 +36,12 @@ ColumnLayout {
             folder: "qrc:" + path
         }
 
-        delegate: PlayerSelectorDelegate {}
+        delegate: PlayerSelectorDelegate {
+            width: parent.width
+            rootPath: spritesFolder.path
+            spritePath: fileName
+
+            onSelected: sprite => selectedSprite = sprite
+        }
     }
 }
