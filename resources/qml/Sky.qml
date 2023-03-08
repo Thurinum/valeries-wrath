@@ -24,40 +24,40 @@ Rectangle {
             property: "color"
             from: "orange"
             to: "lightblue"
-            duration: root.daynight_cycle_duration * animation.transitionDuration
+            duration: app.daynight_cycle_duration * animation.transitionDuration
         }
         PauseAnimation {
-            duration: root.daynight_cycle_duration * 0.3
+            duration: app.daynight_cycle_duration * 0.3
         }
         ColorAnimation {
             target: horizon
             property: "color"
             from: "lightblue"
             to: "orange"
-            duration: root.daynight_cycle_duration * animation.transitionDuration
+            duration: app.daynight_cycle_duration * animation.transitionDuration
         }
         PauseAnimation {
-            duration: root.daynight_cycle_duration * 0.1
+            duration: app.daynight_cycle_duration * 0.1
         }
         ColorAnimation {
             target: horizon
             property: "color"
             from: "orange"
             to: "darkblue"
-            duration: root.daynight_cycle_duration * animation.transitionDuration
+            duration: app.daynight_cycle_duration * animation.transitionDuration
         }
         PauseAnimation {
-            duration: root.daynight_cycle_duration * 0.3
+            duration: app.daynight_cycle_duration * 0.3
         }
         ColorAnimation {
             target: horizon
             property: "color"
             from: "darkblue"
             to: "orange"
-            duration: root.daynight_cycle_duration * animation.transitionDuration
+            duration: app.daynight_cycle_duration * animation.transitionDuration
         }
         PauseAnimation {
-            duration: root.daynight_cycle_duration * 0.1
+            duration: app.daynight_cycle_duration * 0.1
         }
     }
 }

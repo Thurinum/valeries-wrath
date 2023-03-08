@@ -6,7 +6,7 @@ Emitter {
 
 	property bool active: false
 
-	anchors.fill: root
+	anchors.fill: app
 	anchors.verticalCenterOffset: 200
 
 	system: weatherSystem

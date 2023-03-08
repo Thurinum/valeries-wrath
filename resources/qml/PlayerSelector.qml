@@ -4,44 +4,44 @@ import QtQuick.Layouts
 import Qt.labs.folderlistmodel
 
 ColumnLayout {
-    id: selector
+	id: selector
 
-    property string selectedSprite
+	property string selectedSprite
 
-    anchors.fill: parent
-    anchors.margins: 25
-    spacing: 10
+	anchors.fill: parent
+	anchors.margins: 25
+	spacing: 10
 
-    Label {
-        text: "<h1>Choose your character</h1>"
-        Layout.alignment: Qt.AlignHCenter
-    }
+	Label {
+		text: "<h1>Choose your character</h1>"
+		Layout.alignment: Qt.AlignHCenter
+	}
 
-    ListView {
-        id: listView
+	ListView {
+		id: listView
 
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        clip: true
+		Layout.fillWidth: true
+		Layout.fillHeight: true
+		clip: true
 
-        orientation: Qt.Vertical
-        spacing: 25
+		orientation: Qt.Vertical
+		spacing: 25
 
-        model: FolderListModel {
-            id: spritesFolder
+		model: FolderListModel {
+			id: spritesFolder
 
-            property string path: "/resources/images/playersprites/"
+			property string path: "/resources/images/playersprites/"
 
-            nameFilters: ["*.png"]
-            folder: "qrc:" + path
-        }
+			nameFilters: ["*.png"]
+			folder: "qrc:" + path
+		}
 
-        delegate: PlayerSelectorDelegate {
-            width: parent.width
-            rootPath: spritesFolder.path
-            spritePath: fileName
+		delegate: PlayerSelectorDelegate {
+			width: parent.width
+			rootPath: spritesFolder.path
+			spritePath: fileName
 
-            onSelected: sprite => selectedSprite = sprite
-        }
-    }
+			onSelected: sprite => selectedSprite = sprite
+		}
+	}
 }

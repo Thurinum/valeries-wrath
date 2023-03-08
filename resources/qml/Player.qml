@@ -2,29 +2,29 @@ import QtQuick
 import QtQuick.Particles
 
 Emitter {
-    id: player
+	id: player
 
 	property color particlesColor: Qt.rgba(0.1, 0.1, 0.1, 0.4)
-    property double speed: 100
-    required property string sprite
+	property double speed: 100
+	required property string sprite
 
-    QtObject {
-        id: movement
-        property bool isLeft: false
-        property bool isRight: false
-        property bool isTop: false
-        property bool isBottom: false
-        property bool isMoving: isLeft || isRight || isTop || isBottom
-    }
-    property alias movement: movement
+	QtObject {
+		id: movement
+		property bool isLeft: false
+		property bool isRight: false
+		property bool isTop: false
+		property bool isBottom: false
+		property bool isMoving: isLeft || isRight || isTop || isBottom
+	}
+	property alias movement: movement
 
-    signal move(xOffset: double, yOffset: double)
+	signal move(xOffset: double, yOffset: double)
 
-    width: 100
+	width: 100
 	height: 40
-    focus: !drawer.position
+	focus: !drawer.position
 
-    system: trail
+	system: trail
 	emitRate: 10000
 	lifeSpan: 0
 	lifeSpanVariation: 0
@@ -42,7 +42,7 @@ Emitter {
 
 	states: [
 		State {
-            when: movement.isMoving
+			when: movement.isMoving
 
 			PropertyChanges {
 				player {
@@ -68,46 +68,46 @@ Emitter {
 		}
 	}
 
-    Timer {
-        id: movementTimer
-        interval: 50
-        repeat: true
-        running: movement.isMoving
-        triggeredOnStart: true
-        onTriggered: {
-            let xOffset = 0, yOffset = 0;
+	Timer {
+		id: movementTimer
+		interval: 50
+		repeat: true
+		running: movement.isMoving
+		triggeredOnStart: true
+		onTriggered: {
+			let xOffset = 0, yOffset = 0;
 
-            if (movement.isLeft)
-                xOffset += player.speed
+			if (movement.isLeft)
+				xOffset += player.speed
 
-            if (movement.isRight)
-                xOffset -= player.speed
+			if (movement.isRight)
+				xOffset -= player.speed
 
-            if (movement.isTop)
-                yOffset += player.speed
+			if (movement.isTop)
+				yOffset += player.speed
 
-            if (movement.isBottom)
-                yOffset -= player.speed
+			if (movement.isBottom)
+				yOffset -= player.speed
 
-            move(xOffset, yOffset)
-        }
-    }
+			move(xOffset, yOffset)
+		}
+	}
 
 	ParticleSystem {
-        id: trail
+		id: trail
 	}
 
 	ImageParticle {
 		source: "/resources/images/valerie.png"
-        system: trail
-        color: player.particlesColor
+		system: trail
+		color: player.particlesColor
 	}
 
 	Image {
-        id: sprite
-        anchors.centerIn: parent
+		id: sprite
+		anchors.centerIn: parent
 		fillMode: Image.PreserveAspectFit
-        height: player.height + 50
-        source: player.sprite
+		height: player.height + 50
+		source: player.sprite
 	}
 }

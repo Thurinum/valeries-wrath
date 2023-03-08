@@ -1,10 +1,11 @@
+#include "backend.hpp"
 #include <QGuiApplication>
+#include <QObject>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickView>
 #include <QUrl>
-#include "backend.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -19,13 +20,17 @@ int main(int argc, char *argv[])
 	view.setWidth(1280);
 	view.setHeight(720);
 	view.setTitle("SOLID: Valerie's Wrath");
-    view.setIcon(QIcon("qrc:/resources/images/valerie.png"));
-    view.show();
+	view.setIcon(QIcon("qrc:/resources/images/valerie.png"));
+	view.setColor(Qt::transparent);
+	view.setModality(Qt::WindowModal);
+	view.setFlags(Qt::FramelessWindowHint | Qt::CustomizeWindowHint | Qt::Window);
+	QObject::connect(view.engine(), &QQmlEngine::quit, &app, &QGuiApplication::quit);
+	view.show();
 
-    Backend backend;
+	Backend backend;
 
-    QQmlEngine *engine = view.engine();
-    engine->rootContext()->setContextProperty("Backend", &backend);
+	QQmlEngine *engine = view.engine();
+	engine->rootContext()->setContextProperty("Backend", &backend);
 
-    return app.exec();
+	return app.exec();
 }
